@@ -11,4 +11,10 @@
     <ProjectReference Include="..\AEngine.TK.Core\AEngine.TK.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resources\Shaders\default.glsl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

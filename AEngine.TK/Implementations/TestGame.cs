@@ -1,4 +1,5 @@
 ﻿using AEngine.TK.Core;
+using AEngine.TK.Core.Rendering;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 
@@ -15,7 +16,7 @@ internal class TestGame : Game
     private int _vertexBufferObject;
     private int _vertexArrayObject;
 
-    private int _shaderHandle;
+    private Shader _shader;
 
     public TestGame(string windowTitle, int initialWindowWidth, int initialWindowHeight) : base(windowTitle, initialWindowWidth, initialWindowHeight)
     {
@@ -28,56 +29,7 @@ internal class TestGame : Game
 
     protected override void LoadContent()
     {
-        // SHITCODE
-        string vertexShader = @"
-            #version 330 core
-            layout (location = 0) in vec3 aPosition;
-            layout (location = 1) in vec3 aColor;
-            out vec4 vertexColor;
-            void main() 
-            {
-             vertexColor = vec4(aColor.rgb, 1.0);
-             gl_Position = vec4(aPosition.xyz, 1.0);
-            }";
-
-        string fragementShader = @"
-            #version 330 core
-            out vec4 color;
-            in vec4 vertexColor;
-            void main() 
-            {
-             color = vertexColor;
-            }";
-
-        int vertexShaderId = GL.CreateShader(ShaderType.VertexShader);
-        GL.ShaderSource(vertexShaderId, vertexShader);
-        GL.CompileShader(vertexShaderId);
-        GL.GetShader(vertexShaderId, ShaderParameter.CompileStatus, out var vertexShaderCompilationCode);
-        if (vertexShaderCompilationCode != (int)All.True)
-        {
-            Console.WriteLine(GL.GetShaderInfoLog(vertexShaderId));
-        }
-
-        int fragmentShaderId = GL.CreateShader (ShaderType.FragmentShader);
-        GL.ShaderSource(fragmentShaderId, fragementShader);
-        GL.CompileShader(fragmentShaderId);
-        GL.GetShader(fragmentShaderId, ShaderParameter.CompileStatus, out var fragmentShaderCompilationCode);
-        if (fragmentShaderCompilationCode != (int)All.True)
-        {
-            Console.WriteLine(GL.GetShaderInfoLog(fragmentShaderId));
-        }
-
-        _shaderHandle = GL.CreateProgram();
-        GL.AttachShader(_shaderHandle, vertexShaderId);
-        GL.AttachShader(_shaderHandle, fragmentShaderId);
-        GL.LinkProgram(_shaderHandle);
-
-        GL.DetachShader(_shaderHandle, vertexShaderId);
-        GL.DetachShader(_shaderHandle, fragmentShaderId);
-
-        GL.DeleteShader(vertexShaderId);
-        GL.DeleteShader(fragmentShaderId);
-        // SHITCODE
+        _shader = new Shader("Resources/Shaders/default.glsl", true);
 
         _vertexBufferObject = GL.GenBuffer();
         GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
@@ -102,8 +54,7 @@ internal class TestGame : Game
     {
         GL.Clear(ClearBufferMask.ColorBufferBit);
         GL.ClearColor(Color4.CornflowerBlue);
-
-        GL.UseProgram(_shaderHandle);
+        _shader.Use();
         GL.BindVertexArray(_vertexArrayObject);
         GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
     }
