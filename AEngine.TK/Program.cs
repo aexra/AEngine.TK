@@ -1,6 +1,4 @@
-﻿
-
-namespace AEngine.TK;
+﻿namespace AEngine.TK;
 
 public class Program
 {
