@@ -1,4 +1,6 @@
 ﻿using AEngine.TK.Core;
+using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 
 namespace AEngine.TK;
 
@@ -25,7 +27,8 @@ internal class TestGame : Game
 
     protected override void Render(GameTime gameTime)
     {
-        
+        GL.Clear(ClearBufferMask.ColorBufferBit);
+        GL.ClearColor(Color4.CornflowerBlue);
     }
 }
 
