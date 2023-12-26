@@ -46,6 +46,9 @@ internal class TestGame : Game
     {
         GL.Clear(ClearBufferMask.ColorBufferBit);
         GL.ClearColor(Color4.CornflowerBlue);
+
+        GL.BindVertexArray(_vertexArrayObject);
+        GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
     }
 }
 
