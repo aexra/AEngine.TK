@@ -1,4 +1,5 @@
-﻿using OpenTK.Windowing.Common;
+﻿using OpenTK.Graphics.OpenGL4;
+using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using System;
 
@@ -39,6 +40,10 @@ public abstract class Game
         {
             Render(gameTime);
             gameWindow.SwapBuffers();
+        };
+        gameWindow.Resize += (ResizeEventArgs e) => 
+        {
+            GL.Viewport(0, 0, gameWindow.ClientSize.X, gameWindow.ClientSize.Y);
         };
         gameWindow.Run();
     }
