@@ -18,6 +18,8 @@ public abstract class Game
         WindowTitle = windowTitle;
         InitialWindowWidth = initialWindowWidth;
         InitialWindowHeight = initialWindowHeight;
+
+        _nativeWindowSettings.ClientSize = new OpenTK.Mathematics.Vector2i(initialWindowWidth, initialWindowHeight);
     }
 
     public void Run()
