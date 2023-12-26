@@ -7,9 +7,9 @@ namespace AEngine.TK;
 internal class TestGame : Game
 {
     private readonly float[] _vertices = [
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.0f, 0.5f, 0.0f
+        -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+        0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
     ];
 
     private int _vertexBufferObject;
@@ -32,17 +32,21 @@ internal class TestGame : Game
         string vertexShader = @"
             #version 330 core
             layout (location = 0) in vec3 aPosition;
+            layout (location = 1) in vec3 aColor;
+            out vec4 vertexColor;
             void main() 
             {
+             vertexColor = vec4(aColor.rgb, 1.0);
              gl_Position = vec4(aPosition.xyz, 1.0);
             }";
 
         string fragementShader = @"
             #version 330 core
             out vec4 color;
+            in vec4 vertexColor;
             void main() 
             {
-             color = vec4(1.0, 0.0, 0.0, 1.0);
+             color = vertexColor;
             }";
 
         int vertexShaderId = GL.CreateShader(ShaderType.VertexShader);
@@ -82,8 +86,11 @@ internal class TestGame : Game
         _vertexArrayObject = GL.GenVertexArray();
         GL.BindVertexArray(_vertexArrayObject);
 
-        GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+        GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 6 * sizeof(float), 0);
         GL.EnableVertexAttribArray(0);
+
+        GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, 6 * sizeof(float), 3 * sizeof(float));
+        GL.EnableVertexAttribArray(1);
     }
 
     protected override void Update(GameTime gameTime)
