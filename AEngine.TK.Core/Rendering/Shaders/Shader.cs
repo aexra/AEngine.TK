@@ -9,13 +9,9 @@ public class Shader
     private ShaderProgramSource _shaderProgramSource { get; }
     public bool Compiled { get; private set; }
 
-    public Shader(string filePath, bool compile = false)
+    public Shader(string filePath)
     {
         _shaderProgramSource = ParseShader(filePath);
-        if (compile)
-        {
-            CompileShader();
-        }
     }
 
     public bool CompileShader()
@@ -68,6 +64,7 @@ public class Shader
 
     public void Use()
     {
+        if (!Compiled) CompileShader(); 
         GL.UseProgram(ProgramId);
     }
 

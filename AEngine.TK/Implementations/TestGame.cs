@@ -29,7 +29,7 @@ internal class TestGame : Game
 
     protected override void LoadContent()
     {
-        _shader = new Shader("Resources/Shaders/default.glsl", true);
+        _shader = new Shader("Resources/Shaders/default.glsl");
 
         _vertexBufferObject = GL.GenBuffer();
         GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
