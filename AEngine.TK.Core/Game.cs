@@ -1,4 +1,5 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using AEngine.TK.Core.Management;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using System;
@@ -22,12 +23,15 @@ public abstract class Game
 
         _nativeWindowSettings.ClientSize = new OpenTK.Mathematics.Vector2i(initialWindowWidth, initialWindowHeight);
         _nativeWindowSettings.Title = windowTitle;
+        _nativeWindowSettings.API = ContextAPI.OpenGL;
+
+        _gameWindowSettings.UpdateFrequency = 144.0;
     }
 
     public void Run()
     {
         Initialize();
-        using GameWindow gameWindow = new GameWindow(_gameWindowSettings, _nativeWindowSettings);
+        using GameWindow gameWindow = DisplayManager.Instance.CreateWindow(_gameWindowSettings, _nativeWindowSettings);
         GameTime gameTime = new();
         gameWindow.Load += LoadContent;
         gameWindow.UpdateFrame += (FrameEventArgs e) =>
