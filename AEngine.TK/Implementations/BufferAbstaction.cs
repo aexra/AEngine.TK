@@ -19,9 +19,8 @@ internal class BufferAbstraction : Game
         1, 2, 3
     ];
 
+    private VertexArray _vertexArray;
     private VertexBuffer _vertexBuffer;
-    //private int _vertexBufferObject;
-    private int _vertexArrayObject;
     private IndexBuffer _indexBuffer;
 
     private Shader _shader;
@@ -39,10 +38,14 @@ internal class BufferAbstraction : Game
     {
         _shader = new Shader("Resources/Shaders/default.glsl");
 
+        _vertexArray = new();
         _vertexBuffer = new(_vertices);
 
-        _vertexArrayObject = GL.GenVertexArray();
-        GL.BindVertexArray(_vertexArrayObject);
+        BufferLayout layout = new();
+        layout.Add<float>(3);
+        layout.Add<float>(2);
+
+        _vertexArray.AddBuffer(_vertexBuffer, layout);
 
         GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 5 * sizeof(float), 0);
         GL.EnableVertexAttribArray(0);
@@ -63,7 +66,7 @@ internal class BufferAbstraction : Game
         GL.Clear(ClearBufferMask.ColorBufferBit);
         GL.ClearColor(Color4.CornflowerBlue);
         _shader.Use();
-        GL.BindVertexArray(_vertexArrayObject);
+        _vertexArray.Bind();
         GL.DrawElements(PrimitiveType.Triangles, _indices.Length, DrawElementsType.UnsignedInt, 0);
     }
 }
