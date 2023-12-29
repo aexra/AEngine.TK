@@ -6,45 +6,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AEngine.TK.Core.Rendering.Buffers
+namespace AEngine.TK.Core.Rendering.Buffers;
+
+public class VertexArray : IBuffer
 {
-    public class VertexArray : IBuffer
+    public int BufferId { get; }
+
+    public VertexArray() 
     {
-        public int BufferId { get; }
+        BufferId = GL.GenVertexArray();
+    }
 
-        public VertexArray() 
-        {
-            BufferId = GL.GenVertexArray();
-        }
+    ~VertexArray() 
+    {
+        GL.DeleteVertexArray(BufferId);
+    }
 
-        ~VertexArray() 
+    public void AddBuffer(VertexBuffer vertexBuffer, BufferLayout bufferLayout)
+    {
+        Bind();
+        vertexBuffer.Bind();
+        var elemtents = bufferLayout.GetBufferElements();
+        int offset = 0;
+        for (int i = 0; i < elemtents.Count(); i++)
         {
-            GL.DeleteVertexArray(BufferId);
+            var currentElement = elemtents[i];
+            GL.EnableVertexAttribArray(i);
+            GL.VertexAttribPointer(i, currentElement.Count, currentElement.Type, currentElement.Normalized, bufferLayout.GetStride(), offset);
+            offset += currentElement.Count * Utilities.GetSizeOfVertexAttribPointerType(currentElement.Type);
         }
+    }
 
-        public void AddBuffer(VertexBuffer vertexBuffer, BufferLayout bufferLayout)
-        {
-            Bind();
-            vertexBuffer.Bind();
-            var elemtents = bufferLayout.GetBufferElements();
-            int offset = 0;
-            for (int i = 0; i < elemtents.Count(); i++)
-            {
-                var currentElement = elemtents[i];
-                GL.EnableVertexAttribArray(i);
-                GL.VertexAttribPointer(i, currentElement.Count, currentElement.Type, currentElement.Normalized, bufferLayout.GetStride(), offset);
-                offset += currentElement.Count * Utilities.GetSizeOfVertexAttribPointerType(currentElement.Type);
-            }
-        }
+    public void Bind()
+    {
+        GL.BindVertexArray(BufferId);
+    }
 
-        public void Bind()
-        {
-            GL.BindVertexArray(BufferId);
-        }
-
-        public void Unbind()
-        {
-            GL.BindVertexArray(0);
-        }
+    public void Unbind()
+    {
+        GL.BindVertexArray(0);
     }
 }

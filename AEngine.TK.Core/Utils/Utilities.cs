@@ -5,22 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AEngine.TK.Core.Utils
+namespace AEngine.TK.Core.Utils;
+
+public static class Utilities
 {
-    public static class Utilities
+    public static int GetSizeOfVertexAttribPointerType(VertexAttribPointerType type)
     {
-        public static int GetSizeOfVertexAttribPointerType(VertexAttribPointerType type)
+        switch(type)
         {
-            switch(type)
-            {
-                case VertexAttribPointerType.UnsignedByte:
-                    return 1;
-                case VertexAttribPointerType.UnsignedInt:
-                    return 4;
-                case VertexAttribPointerType.Float:
-                    return 4;
-            }
-            return 0;
+            case VertexAttribPointerType.UnsignedByte:
+                return 1;
+            case VertexAttribPointerType.UnsignedInt:
+                return 4;
+            case VertexAttribPointerType.Float:
+                return 4;
         }
+        return 0;
     }
 }

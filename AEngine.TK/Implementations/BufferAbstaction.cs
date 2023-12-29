@@ -3,6 +3,7 @@ using AEngine.TK.Core.Rendering;
 using AEngine.TK.Core.Rendering.Buffers;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
+using System.Resources;
 
 namespace AEngine.TK;
 
@@ -24,6 +25,7 @@ internal class BufferAbstraction : Game
     private IndexBuffer _indexBuffer;
 
     private Shader _shader;
+    private Texture2D _texture;
 
     public BufferAbstraction(string windowTitle, int initialWindowWidth, int initialWindowHeight) : base(windowTitle, initialWindowWidth, initialWindowHeight)
     {
@@ -36,7 +38,7 @@ internal class BufferAbstraction : Game
 
     protected override void LoadContent()
     {
-        _shader = new Shader("Resources/Shaders/default.glsl");
+        _shader = new Shader("Resources/Shaders/TextureShader.glsl");
 
         _vertexArray = new();
         _vertexBuffer = new(_vertices);
@@ -53,6 +55,8 @@ internal class BufferAbstraction : Game
         GL.VertexAttribPointer(1, 2, VertexAttribPointerType.Float, false, 5 * sizeof(float), 3 * sizeof(float));
         GL.EnableVertexAttribArray(1);
 
+        _texture = AEngine.TK.Core.Management.ResourceManager.Instance.LoadTexture("Resources/Textures/honestree.png");
+        _texture.Use();
         _indexBuffer = new IndexBuffer(_indices);
     }
 

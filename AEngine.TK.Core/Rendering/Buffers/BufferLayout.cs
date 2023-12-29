@@ -1,44 +1,43 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 
-namespace AEngine.TK.Core.Rendering.Buffers
+namespace AEngine.TK.Core.Rendering.Buffers;
+
+public class BufferLayout
 {
-    public class BufferLayout
+    private List<BufferElement> _elements = new();
+    private int _stride;
+    
+    public BufferLayout() 
     {
-        private List<BufferElement> _elements = new();
-        private int _stride;
-        
-        public BufferLayout() 
+        _stride = 0;
+    }
+
+    public List<BufferElement> GetBufferElements() => _elements;
+    public int GetStride() => _stride;
+
+    public void Add<T>(int count, bool normalized = false) where T : struct
+    {
+        VertexAttribPointerType type;
+        if (typeof(float) == typeof(T))
         {
-            _stride = 0;
+            type = VertexAttribPointerType.Float;
+            _stride += sizeof(float) * count;
         }
-
-        public List<BufferElement> GetBufferElements() => _elements;
-        public int GetStride() => _stride;
-
-        public void Add<T>(int count, bool normalized = false) where T : struct
+        else if (typeof(uint) == typeof(T))
         {
-            VertexAttribPointerType type;
-            if (typeof(float) == typeof(T))
-            {
-                type = VertexAttribPointerType.Float;
-                _stride += sizeof(float) * count;
-            }
-            else if (typeof(uint) == typeof(T))
-            {
-                type = VertexAttribPointerType.UnsignedInt;
-                _stride += sizeof(int) * count;
-            }
-            else if (typeof(byte) == typeof(T))
-            {
-                type = VertexAttribPointerType.UnsignedByte;
-                _stride += sizeof(byte) * count;
-            } 
-            else
-            {
-                throw new ArgumentException($"{typeof(T)} is Not a Valid Type");
-            }
-            _elements.Add(new BufferElement { Type = type, Count = count, Normalized = normalized });
-
+            type = VertexAttribPointerType.UnsignedInt;
+            _stride += sizeof(int) * count;
         }
+        else if (typeof(byte) == typeof(T))
+        {
+            type = VertexAttribPointerType.UnsignedByte;
+            _stride += sizeof(byte) * count;
+        } 
+        else
+        {
+            throw new ArgumentException($"{typeof(T)} is Not a Valid Type");
+        }
+        _elements.Add(new BufferElement { Type = type, Count = count, Normalized = normalized });
+
     }
 }
