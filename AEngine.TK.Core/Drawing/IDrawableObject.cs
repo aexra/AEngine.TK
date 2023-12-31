@@ -12,9 +12,8 @@ using AEngine.TK.Core.Utils;
 
 namespace AEngine.TK.Core.Drawing
 {
-    public abstract class IDrawableObject
+    public abstract class IDrawableObject : GameObject
     {
-        public Transform transform;
         protected float[] Vertices;
         protected uint[] Indices;
         protected Shader Shader;
@@ -22,27 +21,26 @@ namespace AEngine.TK.Core.Drawing
         protected VertexBuffer VertexBuffer;
         protected IndexBuffer IndexBuffer;
 
-        public IDrawableObject()
+        public IDrawableObject() : base()
         {
-            transform = new Transform();
+            
         }
 
         public IDrawableObject(Vector3 position) : this() 
         {
-            transform.Position = position;  
+            transform.position = position;  
         }
 
         public IDrawableObject(Vector3 position, Vector3 size) : this(position) 
         { 
-            transform.Size = size;
+            transform.size = size;
         }
 
         public IDrawableObject(Vector3 position, Vector3 size, Quaternion rotation) : this(position, size)
         {
-            transform.Rotation = rotation;
+            transform.rotation = rotation;
         }
 
         protected abstract void Load();
-        public abstract void Render();
     }
 }

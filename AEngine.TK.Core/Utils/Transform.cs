@@ -9,8 +9,8 @@ namespace AEngine.TK.Core.Utils
 {
     public class Transform
     {
-        public Vector3 Position = Vector3.Zero;
-        public Vector3 Size = Vector3.Zero;
-        public Quaternion Rotation = Quaternion.Zero;
+        public Vector3 position = Vector3.Zero;
+        public Vector3 size = Vector3.Zero;
+        public Quaternion rotation = Quaternion.Zero;
     }
 }

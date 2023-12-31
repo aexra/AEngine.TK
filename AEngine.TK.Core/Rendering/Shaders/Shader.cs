@@ -1,5 +1,6 @@
 ﻿using AEngine.TK.Core.Rendering.Shaders;
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 
 namespace AEngine.TK.Core.Rendering;
 
@@ -107,5 +108,10 @@ public class Shader
             }
         }
         return new ShaderProgramSource(shaderSource[0], shaderSource[1]);
+    }
+
+    public void SetMatrix4(string uniformName, Matrix4 value)
+    {
+        GL.UniformMatrix4(_uniforms[uniformName], 1, false, ref value.Row0.X);
     }
 }

@@ -49,7 +49,7 @@ namespace AEngine.TK.Core.Drawing
             Core.Management.ResourceManager.Instance.LoadTexture("Resources/Textures/honestree.png");
         }
 
-        public override void Render()
+        public override void Draw()
         {
             VertexArray.Bind();
             GL.DrawElements(PrimitiveType.Triangles, Indices.Length, DrawElementsType.UnsignedInt, 0);
@@ -58,48 +58,23 @@ namespace AEngine.TK.Core.Drawing
         private void DefineVertices()
         {
             Vertices = [
-                1f,
-                1f,
-                0.0f,
-                1.0f,
-                1.0f,
-                1.0f,
-                1.0f,
-                1.0f,
-                0.0f,
-                1f,
-                -1f,
-                0.0f,
-                1.0f,
-                0.0f,
-                1.0f,
-                1.0f,
-                1.0f,
-                0.0f,
-                -1f,
-                -1f,
-                0.0f,
-                0.0f,
-                0.0f,
-                1.0f,
-                1.0f,
-                1.0f,
-                0.0f,
-                -1f,
-                1f,
-                0.0f,
-                0.0f,
-                1.0f,
-                1.0f,
-                1.0f,
-                1.0f,
-                0.0f,
+                0.5f,0.5f,0.0f,1.0f,1.0f,1.0f,1.0f,1.0f,0.0f,
+                0.5f,-0.5f,0.0f,1.0f,0.0f,1.0f,1.0f,1.0f,0.0f,
+                -0.5f,-0.5f,0.0f,0.0f,0.0f,1.0f,1.0f,1.0f,0.0f,
+                -0.5f,0.5f,0.0f,0.0f,1.0f,1.0f,1.0f,1.0f,0.0f,
             ];
         }
 
         private void DefineIndices()
         {
             Indices = [0, 1, 3, 1, 2, 3];
+        }
+
+        public override void Update()
+        {
+            Shader.SetMatrix4("model", Camera.model);
+            Shader.SetMatrix4("view", Camera.view);
+            Shader.SetMatrix4("projection", Camera.projection);
         }
     }
 }
