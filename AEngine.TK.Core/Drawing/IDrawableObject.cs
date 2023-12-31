@@ -7,19 +7,26 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK.Graphics.OpenGL4;
 using AEngine.TK.Core.Rendering;
+using System.Numerics;
 
 namespace AEngine.TK.Core.Drawing
 {
-    public interface IDrawableObject
+    public abstract class IDrawableObject
     {
-        float[] Vertices { get; set; }
-        uint[] Indices { get; set; }
-        Shader Shader { get; set; }
-        VertexArray VertexArray { get;  set; }
-        VertexBuffer VertexBuffer { get;  set; }
-        IndexBuffer IndexBuffer { get;  set; }
+        protected Vector2 size;
+        protected float[] Vertices;
+        protected uint[] Indices;
+        protected Shader Shader;
+        protected VertexArray VertexArray;
+        protected VertexBuffer VertexBuffer;
+        protected IndexBuffer IndexBuffer;
 
-        public void Load() { }
-        public void Render();
+        IDrawableObject() 
+        { 
+            
+        }
+
+        protected abstract void Load();
+        public abstract void Render();
     }
 }
