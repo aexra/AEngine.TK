@@ -18,9 +18,10 @@ void main()
 out vec4 outputColor;
 in vec2 texCoord;
 in vec4 color;
-uniform sampler2D texture0;
+uniform sampler2D u_Texture[2];
 
 void main() 
 {
-    outputColor = texture(texture0, texCoord) * color;
+    int index = 1;
+    outputColor = texture(u_Texture[index], texCoord) * color;
 }

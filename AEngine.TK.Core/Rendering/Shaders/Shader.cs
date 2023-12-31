@@ -8,6 +8,7 @@ public class Shader
     public int ProgramId { get; private set; }
     private ShaderProgramSource _shaderProgramSource { get; }
     public bool Compiled { get; private set; }
+    private readonly IDictionary<string, int> _uniforms = new Dictionary<string, int>();
 
     public Shader(string filePath)
     {
@@ -56,6 +57,14 @@ public class Shader
 
         GL.DeleteShader(vertexShaderId);
         GL.DeleteShader(fragmentShaderId);
+
+        GL.GetProgram(ProgramId, GetProgramParameterName.ActiveUniforms, out var totalUniforms);
+        for (int i = 0; i < totalUniforms; i++)
+        {
+            string key = GL.GetActiveUniform(ProgramId, i, out _, out _);
+            int location = GL.GetUniformLocation(ProgramId, key);
+            _uniforms.Add(key, location);
+        }
 
         Compiled = true;
 
