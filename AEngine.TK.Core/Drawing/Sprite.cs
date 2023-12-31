@@ -66,7 +66,7 @@ namespace AEngine.TK.Core.Drawing
 
         public override void Update()
         {
-            Shader.SetMatrix4("model", Camera.model);
+            Shader.SetMatrix4("model", transform.matrix);
             Shader.SetMatrix4("view", Camera.view);
             Shader.SetMatrix4("projection", Camera.projection);
         }

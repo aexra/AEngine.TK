@@ -20,9 +20,6 @@ internal class DrawableObjectsImpl : Game
     protected override void Initialize()
     {
         Camera.Init();
-        Console.WriteLine(Camera.model);
-        Console.WriteLine(Camera.view);
-        Console.WriteLine(Camera.projection);
     }
 
     protected override void LoadContent()
