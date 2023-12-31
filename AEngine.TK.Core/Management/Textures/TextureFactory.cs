@@ -36,7 +36,7 @@ namespace AEngine.TK.Core.Management.Textures
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
             GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
             _textureCursor++;
-            return new Texture2D(handle);
+            return new Texture2D(handle, image.Width, image.Height, textureUnit);
         }
     }
 }
