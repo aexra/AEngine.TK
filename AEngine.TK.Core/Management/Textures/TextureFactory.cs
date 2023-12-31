@@ -18,7 +18,7 @@ namespace AEngine.TK.Core.Management.Textures
                 throw new Exception($"Exceeded maximum texture slots OpenGL can natively support. Count: {_textureCursor}");
             }
             TextureUnit textureUnit = (TextureUnit)result;
-            GL.ActiveTexture(TextureUnit.Texture0);
+            GL.ActiveTexture(textureUnit);
             GL.BindTexture(TextureTarget.Texture2D, handle);
             using var image = new Bitmap(textureName);
             image.RotateFlip(RotateFlipType.RotateNoneFlipY);
