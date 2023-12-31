@@ -12,10 +12,12 @@ namespace AEngine.TK.Core.Drawing;
 public class Sprite : IDrawableObject
 {
     public string FileName;
+    public string Directory;
 
-    public Sprite(string fn = "Resources/Textures/honestree.png")
+    public Sprite(string fn = "honestree.png", string dir = "Resources/Textures/")
     {
         FileName = fn;
+        Directory = dir;
 
         DefineVertices();
         DefineIndices();
@@ -48,7 +50,7 @@ public class Sprite : IDrawableObject
         int[] samplers = { 0, 1 };
         GL.Uniform1(textureSamplerUniformLocation, 2, samplers);
 
-        Core.Management.ResourceManager.Instance.LoadTexture(FileName);
+        Core.Management.ResourceManager.Instance.LoadTexture(Directory + FileName);
     }
 
     private void DefineVertices()
