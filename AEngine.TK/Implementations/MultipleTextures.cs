@@ -10,38 +10,10 @@ namespace AEngine.TK;
 internal class MultipleTextures : Game
 {
     private readonly float[] _vertices = [
-        0.5f,
-        0.5f,
-        0.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-        0.0f,
-        0.0f,
-        0.5f,
-        -0.5f,
-        0.0f,
-        1.0f,
-        0.0f,
-        0.0f,
-        1.0f,
-        0.0f,
-        -0.5f,
-        -0.5f,
-        0.0f,
-        0.0f,
-        0.0f,
-        0.0f,
-        0.0f,
-        1.0f,
-        -0.5f,
-        0.5f,
-        0.0f,
-        0.0f,
-        1.0f,
-        1.0f,
-        0.0f,
-        1.0f,
+        1f, 1f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,   0.0f,
+        1f, -1f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f,  0.0f,
+        -1f, -1f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+        -1f, 1f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f,  0.0f,
     ];
     private readonly uint[] _indices = [
         0,
@@ -57,7 +29,6 @@ internal class MultipleTextures : Game
     private IndexBuffer _indexBuffer;
 
     private Shader _shader;
-    private Texture2D _texture;
 
     public MultipleTextures(string windowTitle, int initialWindowWidth, int initialWindowHeight) : base(windowTitle, initialWindowWidth, initialWindowHeight)
     {
@@ -84,9 +55,10 @@ internal class MultipleTextures : Game
         layout.Add<float>(3);
         layout.Add<float>(2);
         layout.Add<float>(3);
+        layout.Add<float>(1);
 
         _vertexArray.AddBuffer(_vertexBuffer, layout);
-
+        _shader.Use();
         _indexBuffer = new IndexBuffer(_indices);
 
         var textureSamplerUniformLocation = _shader.GetUniformLocation("u_Texture[0]");
@@ -94,6 +66,7 @@ internal class MultipleTextures : Game
         GL.Uniform1(textureSamplerUniformLocation, 2, samplers);
 
         Core.Management.ResourceManager.Instance.LoadTexture("Resources/Textures/honestree.png");
+        Core.Management.ResourceManager.Instance.LoadTexture("Resources/Textures/hc.jpg");
     }
 
     protected override void Update(GameTime gameTime)
@@ -105,7 +78,6 @@ internal class MultipleTextures : Game
     {
         GL.Clear(ClearBufferMask.ColorBufferBit);
         GL.ClearColor(Color4.CornflowerBlue);
-        _shader.Use();
         _vertexArray.Bind();
         GL.DrawElements(PrimitiveType.Triangles, _indices.Length, DrawElementsType.UnsignedInt, 0);
     }
