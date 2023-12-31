@@ -13,7 +13,7 @@ namespace AEngine.TK;
 internal class DrawableObjectsImpl : Game
 {
     Sprite sprite;
-    float speed = 1.5f;
+    float cameraSpeed = 0.015f;
 
     public DrawableObjectsImpl(string windowTitle, int initialWindowWidth, int initialWindowHeight) : base(windowTitle, initialWindowWidth, initialWindowHeight)
     {
@@ -30,7 +30,7 @@ internal class DrawableObjectsImpl : Game
         sprite.transform.scale = new(0.3f, 0.3f, 0.0f);
     }
 
-    protected override void Update(GameTime gameTime)
+    protected override void Update(GameTime Time)
     {
         if (!GameWindow.IsFocused)
         {
@@ -38,40 +38,41 @@ internal class DrawableObjectsImpl : Game
         }
 
         KeyboardState input = GameWindow.KeyboardState;
-        Vector3 resultDir = Vector3.Zero;
+        Vector3 dir = new Vector3(0,0,0);
 
         if (input.IsKeyDown(Keys.W))
         {
-            resultDir.X = 1;
+            dir.X--;
         }
 
         if (input.IsKeyDown(Keys.S))
         {
-            resultDir.X = -1;
+            dir.X++;
         }
 
         if (input.IsKeyDown(Keys.A))
         {
-            resultDir.Y = -1;
+            dir.Y--;
         }
 
         if (input.IsKeyDown(Keys.D))
         {
-            resultDir.Y = 1;
+            dir.Y++;
         }
 
         if (input.IsKeyDown(Keys.Space))
         {
-            resultDir.Z = 1;
+            dir.Z++;
         }
 
         if (input.IsKeyDown(Keys.LeftShift))
         {
-            resultDir.Z = -1;
+            dir.Z--;
         }
 
-        Camera.Translate(resultDir, speed * gameTime.DeltaTime.Milliseconds / 100);
-
+        Camera.Translate(new Vector3(dir.Y * cameraSpeed * Time.deltaTime,
+            dir.Z * (cameraSpeed - 0.005f) * Time.deltaTime,
+            dir.X * cameraSpeed * Time.deltaTime));
 
         sprite.Update();
     }

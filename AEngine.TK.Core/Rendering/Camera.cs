@@ -28,35 +28,10 @@ public class Camera
 
     }
 
-    public static void Translate(Vector3 direction, float speed)
+    public static void Translate(Vector3 by)
     {
-        if (direction.X == 1)
-        {
-            position += front * speed;
-        }
-        else if (direction.X == -1) 
-        {
-            position -= front * speed;
-        }
-
-        if (direction.Y == -1)
-        {
-            position -= Vector3.Normalize(Vector3.Cross(front, up)) * speed;
-        }
-        else if (direction.Y == 1)
-        {
-            position += Vector3.Normalize(Vector3.Cross(front, up)) * speed;
-        }
-
-        if (direction.Z == 1)
-        {
-            position += up * speed;
-        }
-        else if (direction.Z == -1)
-        {
-            position -= up * speed;
-        }
-
+        position += by;
         view = Matrix4.LookAt(position, position + front, Vector3.UnitY);
+        Console.WriteLine(position);
     }
 }
