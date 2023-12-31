@@ -82,9 +82,10 @@ internal class MultipleTextures : Game
 
         _vertexArray.AddBuffer(_vertexBuffer, layout);
 
+        _indexBuffer = new IndexBuffer(_indices);
+
         _texture = AEngine.TK.Core.Management.ResourceManager.Instance.LoadTexture("Resources/Textures/honestree.png");
         _texture.Use();
-        _indexBuffer = new IndexBuffer(_indices);
     }
 
     protected override void Update(GameTime gameTime)
