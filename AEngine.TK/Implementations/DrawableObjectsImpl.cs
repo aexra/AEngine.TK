@@ -70,7 +70,7 @@ internal class DrawableObjectsImpl : Game
             resultDir.Z = -1;
         }
 
-        Camera.Translate(resultDir, speed / 10);
+        Camera.Translate(resultDir, speed * gameTime.DeltaTime.Milliseconds / 100);
 
 
         sprite.Update();
