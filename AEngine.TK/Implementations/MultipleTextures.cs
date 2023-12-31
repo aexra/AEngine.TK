@@ -71,6 +71,11 @@ internal class MultipleTextures : Game
     protected override void LoadContent()
     {
         _shader = new Shader("Resources/Shaders/MulTextures.glsl");
+        if (!_shader.CompileShader())
+        {
+            Console.WriteLine("Failed to Compile Shader");
+            return;
+        }
 
         _vertexArray = new();
         _vertexBuffer = new(_vertices);
@@ -84,8 +89,11 @@ internal class MultipleTextures : Game
 
         _indexBuffer = new IndexBuffer(_indices);
 
-        _texture = AEngine.TK.Core.Management.ResourceManager.Instance.LoadTexture("Resources/Textures/honestree.png");
-        _texture.Use();
+        var textureSamplerUniformLocation = _shader.GetUniformLocation("u_Texture[0]");
+        int[] samplers = { 0, 1 };
+        GL.Uniform1(textureSamplerUniformLocation, 2, samplers);
+
+        Core.Management.ResourceManager.Instance.LoadTexture("Resources/Textures/honestree.png");
     }
 
     protected override void Update(GameTime gameTime)

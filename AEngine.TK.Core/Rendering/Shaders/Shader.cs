@@ -67,7 +67,6 @@ public class Shader
         }
 
         Compiled = true;
-
         return true;
     }
 

@@ -1,9 +1,4 @@
 ﻿using AEngine.TK.Core.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenTK.Graphics.OpenGL4;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -12,9 +7,17 @@ namespace AEngine.TK.Core.Management.Textures
 {
     public static class TextureFactory
     {
+        private static int _textureCursor = 0;
+
         public static Texture2D Load(string textureName)
         {
             int handle = GL.GenTexture();
+            Enum.TryParse(typeof(TextureUnit), $"Texture{_textureCursor}", out var result);
+            if (result == null)
+            {
+                throw new Exception($"Exceeded maximum texture slots OpenGL can natively support. Count: {_textureCursor}");
+            }
+            TextureUnit textureUnit = (TextureUnit)result;
             GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, handle);
             using var image = new Bitmap(textureName);
@@ -32,7 +35,7 @@ namespace AEngine.TK.Core.Management.Textures
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
             GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
-
+            _textureCursor++;
             return new Texture2D(handle);
         }
     }
