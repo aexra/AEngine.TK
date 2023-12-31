@@ -5,18 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AEngine.TK.Core.Utils
+namespace AEngine.TK.Core.Utils;
+
+public abstract class GameObject
 {
-    public abstract class GameObject
+    public Transform transform;
+
+    public GameObject()
     {
-        public Transform transform;
-
-        public GameObject()
-        {
-            this.transform = new();
-        }
-
-        public abstract void Update();
-        public abstract void Draw();
+        this.transform = new();
     }
+
+    public abstract void Update();
+    public abstract void Draw();
 }

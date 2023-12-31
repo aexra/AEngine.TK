@@ -4,6 +4,7 @@ using AEngine.TK.Core.Rendering;
 using AEngine.TK.Core.Rendering.Buffers;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System.Resources;
 
 namespace AEngine.TK;
@@ -30,6 +31,9 @@ internal class DrawableObjectsImpl : Game
 
     protected override void Update(GameTime gameTime)
     {
+        
+        
+
         sprite.Update();
     }
 
