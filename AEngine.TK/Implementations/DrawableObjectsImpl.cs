@@ -26,7 +26,7 @@ internal class DrawableObjectsImpl : Game
 
     protected override void LoadContent()
     {
-        sprite = new Sprite();
+        sprite = new Sprite("hc.jpg");
         sprite.transform.scale = new(1f, 1f, 0.0f);
         sprite.transform.position = new(0f, -0.5f, 0f);
     }
