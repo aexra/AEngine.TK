@@ -25,7 +25,7 @@ internal class DrawableObjectsImpl : Game
     protected override void LoadContent()
     {
         sprite = new Sprite();
-        sprite.transform.size = new(0.3f, 0.3f, 0.0f);
+        sprite.transform.scale = new(0.3f, 0.3f, 0.0f);
     }
 
     protected override void Update(GameTime gameTime)

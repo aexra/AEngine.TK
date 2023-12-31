@@ -49,12 +49,6 @@ namespace AEngine.TK.Core.Drawing
             Core.Management.ResourceManager.Instance.LoadTexture("Resources/Textures/honestree.png");
         }
 
-        public override void Draw()
-        {
-            VertexArray.Bind();
-            GL.DrawElements(PrimitiveType.Triangles, Indices.Length, DrawElementsType.UnsignedInt, 0);
-        }
-
         private void DefineVertices()
         {
             Vertices = [
@@ -75,6 +69,12 @@ namespace AEngine.TK.Core.Drawing
             Shader.SetMatrix4("model", Camera.model);
             Shader.SetMatrix4("view", Camera.view);
             Shader.SetMatrix4("projection", Camera.projection);
+        }
+
+        public override void Draw()
+        {
+            VertexArray.Bind();
+            GL.DrawElements(PrimitiveType.Triangles, Indices.Length, DrawElementsType.UnsignedInt, 0);
         }
     }
 }

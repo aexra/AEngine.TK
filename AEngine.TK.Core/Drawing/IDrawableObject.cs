@@ -31,9 +31,9 @@ namespace AEngine.TK.Core.Drawing
             transform.position = position;  
         }
 
-        public IDrawableObject(Vector3 position, Vector3 size) : this(position) 
+        public IDrawableObject(Vector3 position, Vector3 scale) : this(position) 
         { 
-            transform.size = size;
+            transform.scale = scale;
         }
 
         public IDrawableObject(Vector3 position, Vector3 size, Quaternion rotation) : this(position, size)
