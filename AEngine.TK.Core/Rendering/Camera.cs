@@ -32,6 +32,5 @@ public class Camera
     {
         position += by;
         view = Matrix4.LookAt(position, position + front, Vector3.UnitY);
-        Console.WriteLine(position);
     }
 }
