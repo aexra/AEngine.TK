@@ -13,5 +13,6 @@ public class Transform
     public Vector3 position = Vector3.Zero;
     public Vector3 scale = Vector3.Zero;
     public Quaternion rotation = Quaternion.Zero;
-    public Otk.Matrix4 matrix = new Otk.Matrix4();
+    //public Otk.Matrix4 matrix = new Otk.Matrix4();
+    public Otk.Matrix4 matrix = Otk.Matrix4.CreateRotationX(Otk.MathHelper.DegreesToRadians(-55.0f));
 }

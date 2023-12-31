@@ -11,6 +11,7 @@ public abstract class Game
     protected string WindowTitle { get; set; }
     protected int InitialWindowWidth { get; set; }
     protected int InitialWindowHeight { get; set; }
+    protected GameWindow GameWindow { get; private set; }
 
     private GameWindowSettings _gameWindowSettings = GameWindowSettings.Default;
     private NativeWindowSettings _nativeWindowSettings = NativeWindowSettings.Default;
@@ -31,26 +32,26 @@ public abstract class Game
     public void Run()
     {
         Initialize();
-        using GameWindow gameWindow = DisplayManager.Instance.CreateWindow(_gameWindowSettings, _nativeWindowSettings);
+        GameWindow = DisplayManager.Instance.CreateWindow(_gameWindowSettings, _nativeWindowSettings);
         GameTime gameTime = new();
-        gameWindow.Load += LoadContent;
-        gameWindow.UpdateFrame += (FrameEventArgs e) =>
+        GameWindow.Load += LoadContent;
+        GameWindow.UpdateFrame += (FrameEventArgs e) =>
         {
             double time = e.Time;
             gameTime.DeltaTime = TimeSpan.FromSeconds(time);
             gameTime.TotalGameTime += TimeSpan.FromSeconds(time);
             Update(gameTime);
         };
-        gameWindow.RenderFrame += (FrameEventArgs e) =>
+        GameWindow.RenderFrame += (FrameEventArgs e) =>
         {
             Render(gameTime);
-            gameWindow.SwapBuffers();
+            GameWindow.SwapBuffers();
         };
-        gameWindow.Resize += (ResizeEventArgs e) => 
+        GameWindow.Resize += (ResizeEventArgs e) => 
         {
-            GL.Viewport(0, 0, gameWindow.ClientSize.X, gameWindow.ClientSize.Y);
+            GL.Viewport(0, 0, GameWindow.ClientSize.X, GameWindow.ClientSize.Y);
         };
-        gameWindow.Run();
+        GameWindow.Run();
     }
 
     protected abstract void Initialize();
