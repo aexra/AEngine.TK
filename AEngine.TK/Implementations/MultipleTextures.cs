@@ -70,7 +70,7 @@ internal class MultipleTextures : Game
 
     protected override void LoadContent()
     {
-        _shader = new Shader("Resources/Shaders/TextureShader.glsl");
+        _shader = new Shader("Resources/Shaders/MulTextures.glsl");
 
         _vertexArray = new();
         _vertexBuffer = new(_vertices);
