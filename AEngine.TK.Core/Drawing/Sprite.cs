@@ -66,7 +66,7 @@ public class Sprite : IDrawableObject
 
     public override void Update()
     {
-        Shader.SetMatrix4("model", transform.matrix);
+        Shader.SetMatrix4("model", transform.Matrix);
         Shader.SetMatrix4("view", Camera.view);
         Shader.SetMatrix4("projection", Camera.projection);
     }

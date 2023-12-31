@@ -12,7 +12,7 @@ public class Camera
 {
     public static Matrix4 view;
     public static Matrix4 projection;
-    public static Vector3 position = new Vector3(0, 0, -3);
+    public static Vector3 position = new Vector3(0, 0, 0);
 
     private static Vector3 front = new Vector3(0.0f, 0.0f, -1.0f);
     private static Vector3 up = new Vector3(0.0f, 1.0f, 0.0f);

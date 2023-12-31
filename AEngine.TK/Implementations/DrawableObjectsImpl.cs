@@ -13,7 +13,7 @@ namespace AEngine.TK;
 internal class DrawableObjectsImpl : Game
 {
     Sprite sprite;
-    float cameraSpeed = 0.015f;
+    float cameraSpeed = 2f;
 
     public DrawableObjectsImpl(string windowTitle, int initialWindowWidth, int initialWindowHeight) : base(windowTitle, initialWindowWidth, initialWindowHeight)
     {
@@ -70,9 +70,9 @@ internal class DrawableObjectsImpl : Game
             dir.Z--;
         }
 
-        Camera.Translate(new Vector3(dir.Y * cameraSpeed * Time.deltaTime,
-            dir.Z * (cameraSpeed - 0.005f) * Time.deltaTime,
-            dir.X * cameraSpeed * Time.deltaTime));
+        Camera.Translate(new Vector3(dir.Y * cameraSpeed * Time.deltaTime / 1000,
+            dir.Z * (cameraSpeed / 2) * Time.deltaTime / 1000,
+            dir.X * cameraSpeed * Time.deltaTime / 1000));
 
         sprite.Update();
     }
