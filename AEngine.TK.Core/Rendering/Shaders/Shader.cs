@@ -112,6 +112,6 @@ public class Shader
 
     public void SetMatrix4(string uniformName, Matrix4 value)
     {
-        GL.UniformMatrix4(_uniforms[uniformName], 1, false, ref value.Row0.X);
+        GL.UniformMatrix4(_uniforms[uniformName], true, ref value);
     }
 }
