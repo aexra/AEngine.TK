@@ -82,15 +82,6 @@ internal class MultipleTextures : Game
 
         _vertexArray.AddBuffer(_vertexBuffer, layout);
 
-        GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 0);
-        GL.EnableVertexAttribArray(0);
-
-        GL.VertexAttribPointer(1, 2, VertexAttribPointerType.Float, false, 8 * sizeof(float), 3 * sizeof(float));
-        GL.EnableVertexAttribArray(1);
-
-        GL.VertexAttribPointer(2, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 5 * sizeof(float));
-        GL.EnableVertexAttribArray(1);
-
         _texture = AEngine.TK.Core.Management.ResourceManager.Instance.LoadTexture("Resources/Textures/honestree.png");
         _texture.Use();
         _indexBuffer = new IndexBuffer(_indices);
