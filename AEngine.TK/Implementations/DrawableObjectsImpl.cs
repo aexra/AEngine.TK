@@ -38,7 +38,7 @@ internal class DrawableObjectsImpl : Game
 
     protected override void Render(GameTime gameTime)
     {
-        GL.Clear(ClearBufferMask.ColorBufferBit);
+        GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
         GL.ClearColor(Color4.CornflowerBlue);
         sprite.Draw();
     }
