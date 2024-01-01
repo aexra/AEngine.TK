@@ -23,12 +23,12 @@ internal class DrawableObjectsImpl : Game
     protected override void Initialize()
     {
         Camera.Init();
+        Camera.position.Z += 1.3f;
     }
 
     protected override void LoadContent()
     {
         Tree.Add(new Sprite("hc.jpg"));
-        ((Sprite)Tree.Last()).Modulate = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
     }
 
     protected override void Update()
