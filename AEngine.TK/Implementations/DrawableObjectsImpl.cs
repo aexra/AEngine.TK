@@ -1,5 +1,6 @@
 ﻿using AEngine.TK.Core;
 using AEngine.TK.Core.Drawing;
+using AEngine.TK.Core.Engine;
 using AEngine.TK.Core.Rendering;
 using AEngine.TK.Core.Rendering.Buffers;
 using OpenTK.Graphics.OpenGL4;
@@ -27,7 +28,7 @@ internal class DrawableObjectsImpl : Game
 
     protected override void LoadContent()
     {
-        sprite = new Sprite();
+        Tree.Add(new Sprite());
     }
 
     protected override void Update()
@@ -74,7 +75,7 @@ internal class DrawableObjectsImpl : Game
             dir.Z * (cameraSpeed / 2) * Time.deltaTime / 1000,
             dir.X * cameraSpeed * Time.deltaTime / 1000));
 
-        sprite.Update();
+        Tree.Update();
     }
 
     protected override void Render()
@@ -82,7 +83,7 @@ internal class DrawableObjectsImpl : Game
         GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
         GL.ClearColor(Color4.CornflowerBlue);
 
-        sprite.Draw();
+        Tree.Draw();
     }
 }
 
