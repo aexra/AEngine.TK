@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK.Graphics.OpenGL4;
+using System.Numerics;
 
 namespace AEngine.TK.Core.Drawing;
 
@@ -13,19 +14,24 @@ public class Sprite : IDrawableObject
 {
     public string FileName;
     public string Directory;
+    public Texture2D Texture;
+    public Vector2 Size;
 
     public Sprite(string fn = "honestree.png", string dir = "Resources/Textures/")
     {
         FileName = fn;
         Directory = dir;
 
-        DefineVertices();
-        DefineIndices();
         Load();
     }
 
     protected override void Load()
     {
+        Texture = Core.Management.ResourceManager.Instance.LoadTexture(Directory + FileName);
+        Size = new Vector2(Texture.Width, Texture.Height);
+        DefineVertices();
+        DefineIndices();
+
         Shader = new Shader("Resources/Shaders/DefaultTextureShader.glsl");
         if (!Shader.CompileShader())
         {
@@ -49,18 +55,31 @@ public class Sprite : IDrawableObject
         var textureSamplerUniformLocation = Shader.GetUniformLocation("u_Texture[0]");
         int[] samplers = { 0, 1 };
         GL.Uniform1(textureSamplerUniformLocation, 2, samplers);
-
-        Core.Management.ResourceManager.Instance.LoadTexture(Directory + FileName);
     }
 
     private void DefineVertices()
     {
-        Vertices = [
-            1f,1f,0.0f,1.0f,1.0f,1.0f,1.0f,1.0f,0.0f,
-            1f,-1f,0.0f,1.0f,0.0f,1.0f,1.0f,1.0f,0.0f,
-            -1f,-1f,0.0f,0.0f,0.0f,1.0f,1.0f,1.0f,0.0f,
-            -1f,1f,0.0f,0.0f,1.0f,1.0f,1.0f,1.0f,0.0f,
-        ];
+        float aspect = Size.X / Size.Y;
+        if (aspect > 1)
+        {
+            float otherside = 1 / Size.X * Size.Y;
+            Vertices = [
+                1f,otherside,0.0f,1.0f,1.0f,1.0f,1.0f,1.0f,0.0f,
+                1f,-otherside,0.0f,1.0f,0.0f,1.0f,1.0f,1.0f,0.0f,
+                -1f,-otherside,0.0f,0.0f,0.0f,1.0f,1.0f,1.0f,0.0f,
+                -1f,otherside,0.0f,0.0f,1.0f,1.0f,1.0f,1.0f,0.0f,
+            ];
+        }
+        else
+        {
+            float otherside = 1 / Size.Y * Size.X;
+            Vertices = [
+                otherside,1f,0.0f,1.0f,1.0f,1.0f,1.0f,1.0f,0.0f,
+                otherside,-1f,0.0f,1.0f,0.0f,1.0f,1.0f,1.0f,0.0f,
+                -otherside,-1f,0.0f,0.0f,0.0f,1.0f,1.0f,1.0f,0.0f,
+                -otherside,1f,0.0f,0.0f,1.0f,1.0f,1.0f,1.0f,0.0f,
+            ];
+        }
     }
 
     private void DefineIndices()
