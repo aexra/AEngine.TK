@@ -26,4 +26,6 @@ uniform vec3 mousePos;
 void main() 
 {
     outputColor = color;
+    float distance = sqrt(pow(gl_FragCoord.x - mousePos.x, 2.0) + pow(gl_FragCoord.y - (windowSize.y - mousePos.y), 2.0));
+    if (distance < 10) { outputColor = vec4(1.0, 1.0, 1.0, 1-distance/10); }
 }
