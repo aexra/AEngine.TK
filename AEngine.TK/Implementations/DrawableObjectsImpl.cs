@@ -26,33 +26,33 @@ internal class DrawableObjectsImpl : Game
 
     protected override void LoadContent()
     {
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
-        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
+        sprites.Add(new Sprite());
 
         Random rnd = new Random();
         foreach (var sprite in sprites)
         {
-            sprite.transform.position = new System.Numerics.Vector3((float)rnd.NextDouble() * rnd.Next(-2, 2), (float)rnd.NextDouble() * rnd.Next(-2, 2), (float)rnd.NextDouble() * rnd.Next(-2, 2));
+            sprite.transform.position = new System.Numerics.Vector3((float)rnd.NextDouble() * rnd.Next(-2, 2), (float)rnd.NextDouble() * rnd.Next(-2, 2), 0);
         }
     }
 
