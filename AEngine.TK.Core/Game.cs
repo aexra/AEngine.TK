@@ -34,18 +34,17 @@ public abstract class Game
     {
         Initialize();
         GameWindow = DisplayManager.Instance.CreateWindow(_gameWindowSettings, _nativeWindowSettings);
-        GameTime gameTime = new();
         GameWindow.Load += LoadContent;
         GameWindow.UpdateFrame += (FrameEventArgs e) =>
         {
             double time = e.Time;
-            gameTime.DeltaTime = TimeSpan.FromSeconds(time);
-            gameTime.TotalGameTime += TimeSpan.FromSeconds(time);
-            Update(gameTime);
+            Time.DeltaTime = TimeSpan.FromSeconds(time);
+            Time.TotalGameTime += TimeSpan.FromSeconds(time);
+            Update();
         };
         GameWindow.RenderFrame += (FrameEventArgs e) =>
         {
-            Render(gameTime);
+            Render();
             GameWindow.SwapBuffers();
         };
         GameWindow.Resize += (ResizeEventArgs e) => 
@@ -58,6 +57,6 @@ public abstract class Game
 
     protected abstract void Initialize();
     protected abstract void LoadContent();
-    protected abstract void Update(GameTime gameTime);
-    protected abstract void Render(GameTime gameTime);
+    protected abstract void Update();
+    protected abstract void Render();
 }

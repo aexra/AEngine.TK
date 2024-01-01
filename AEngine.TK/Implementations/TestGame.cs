@@ -45,12 +45,12 @@ internal class TestGame : Game
         GL.EnableVertexAttribArray(1);
     }
 
-    protected override void Update(GameTime gameTime)
+    protected override void Update()
     {
         
     }
 
-    protected override void Render(GameTime gameTime)
+    protected override void Render()
     {
         GL.Clear(ClearBufferMask.ColorBufferBit);
         GL.ClearColor(Color4.CornflowerBlue);

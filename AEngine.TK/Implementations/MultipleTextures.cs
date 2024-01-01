@@ -69,12 +69,12 @@ internal class MultipleTextures : Game
         Core.Management.ResourceManager.Instance.LoadTexture("Resources/Textures/hc.jpg");
     }
 
-    protected override void Update(GameTime gameTime)
+    protected override void Update()
     {
 
     }
 
-    protected override void Render(GameTime gameTime)
+    protected override void Render()
     {
         GL.Clear(ClearBufferMask.ColorBufferBit);
         GL.ClearColor(Color4.CornflowerBlue);

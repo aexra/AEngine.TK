@@ -30,7 +30,7 @@ internal class DrawableObjectsImpl : Game
         sprite = new Sprite();
     }
 
-    protected override void Update(GameTime Time)
+    protected override void Update()
     {
         if (!GameWindow.IsFocused)
         {
@@ -77,7 +77,7 @@ internal class DrawableObjectsImpl : Game
         sprite.Update();
     }
 
-    protected override void Render(GameTime gameTime)
+    protected override void Render()
     {
         GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
         GL.ClearColor(Color4.CornflowerBlue);
