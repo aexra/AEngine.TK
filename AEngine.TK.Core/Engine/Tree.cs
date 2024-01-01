@@ -76,5 +76,8 @@ namespace AEngine.TK.Core.Engine
                 obj.Draw();
             }
         }
+
+        public static GameObject First() => gameObjects.First();
+        public static GameObject Last() => gameObjects.Last();
     }
 }
