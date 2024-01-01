@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK.Graphics.OpenGL4;
 using AEngine.TK.Core.Rendering;
-using System.Numerics;
 using AEngine.TK.Core.Utils;
+using OpenTK.Mathematics;
 
 namespace AEngine.TK.Core.Drawing;
 

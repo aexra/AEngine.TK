@@ -13,7 +13,7 @@ namespace AEngine.TK;
 internal class DrawableObjectsImpl : Game
 {
     float cameraSpeed = 2f;
-    List<Sprite> sprites = new();
+    Sprite sprite;
 
     public DrawableObjectsImpl(string windowTitle, int initialWindowWidth, int initialWindowHeight) : base(windowTitle, initialWindowWidth, initialWindowHeight)
     {
@@ -26,34 +26,7 @@ internal class DrawableObjectsImpl : Game
 
     protected override void LoadContent()
     {
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-        sprites.Add(new Sprite());
-
-        Random rnd = new Random();
-        foreach (var sprite in sprites)
-        {
-            sprite.transform.position = new System.Numerics.Vector3((float)rnd.NextDouble() * rnd.Next(-2, 2), (float)rnd.NextDouble() * rnd.Next(-2, 2), 0);
-        }
+        sprite = new Sprite();
     }
 
     protected override void Update(GameTime Time)
@@ -100,10 +73,7 @@ internal class DrawableObjectsImpl : Game
             dir.Z * (cameraSpeed / 2) * Time.deltaTime / 1000,
             dir.X * cameraSpeed * Time.deltaTime / 1000));
 
-        foreach (var sprite in sprites)
-        {
-            sprite.Update();
-        }
+        sprite.Update();
     }
 
     protected override void Render(GameTime gameTime)
@@ -111,10 +81,7 @@ internal class DrawableObjectsImpl : Game
         GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
         GL.ClearColor(Color4.CornflowerBlue);
 
-        foreach (var sprite in sprites)
-        {
-            sprite.Draw();
-        }
+        sprite.Draw();
     }
 }
 
