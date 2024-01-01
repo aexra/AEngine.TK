@@ -1,4 +1,5 @@
 ﻿using AEngine.TK.Core.Management;
+using AEngine.TK.Core.Utils;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
@@ -51,6 +52,7 @@ public abstract class Game
         {
             GL.Viewport(0, 0, GameWindow.ClientSize.X, GameWindow.ClientSize.Y);
         };
+        GameWindow.MouseMove += Input.OnMouseMove;
         GameWindow.Run();
     }
 

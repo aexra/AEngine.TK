@@ -17,7 +17,6 @@ void main()
     texIndex = aIndex;
     texCoord = aTexCoord;
     gl_Position = vec4(aPosition.xyz, 1.0) * model * view * projection;
-    //gl_Position = vec4(aPosition.xyz, 1.0);
 }
 
 #shader fragment
@@ -27,9 +26,10 @@ in float texIndex;
 in vec2 texCoord;
 in vec4 color;
 uniform sampler2D u_Texture[2];
+uniform vec3 mousePos;
 
 void main() 
 {
     int index = int(texIndex);
-    outputColor = texture(u_Texture[index], texCoord) * color;
+    outputColor = texture(u_Texture[index], texCoord) * color * vec4(mousePos.xyz, 1.0);
 }

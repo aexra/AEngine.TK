@@ -9,6 +9,7 @@ using OpenTK.Graphics.OpenGL4;
 using AEngine.TK.Core.Rendering;
 using AEngine.TK.Core.Utils;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Desktop;
 
 namespace AEngine.TK.Core.Drawing;
 
@@ -45,6 +46,7 @@ public abstract class IDrawableObject : GameObject
     public override void Draw()
     {
         Shader.Use();
+        Shader.SetVector3("mousePos", new Vector3(Input.MousePosition.X, Input.MousePosition.Y, 0f));
         Shader.SetMatrix4("model", transform.Matrix);
         Shader.SetMatrix4("view", Camera.view);
         Shader.SetMatrix4("projection", Camera.projection);

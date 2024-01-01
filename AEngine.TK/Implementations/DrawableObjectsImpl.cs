@@ -22,6 +22,7 @@ internal class DrawableObjectsImpl : Game
     protected override void Initialize()
     {
         Camera.Init();
+        Camera.Translate(new Vector3(0, 0, 2));
     }
 
     protected override void LoadContent()
