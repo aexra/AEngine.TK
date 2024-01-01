@@ -26,7 +26,7 @@ public abstract class IDrawableObject : GameObject
 
     public IDrawableObject() : base()
     {
-        
+       
     }
 
     public IDrawableObject(Vector3 position) : this() 
