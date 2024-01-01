@@ -12,8 +12,8 @@ namespace AEngine.TK;
 
 internal class DrawableObjectsImpl : Game
 {
-    Sprite sprite;
     float cameraSpeed = 2f;
+    List<Sprite> sprites = new();
 
     public DrawableObjectsImpl(string windowTitle, int initialWindowWidth, int initialWindowHeight) : base(windowTitle, initialWindowWidth, initialWindowHeight)
     {
@@ -26,9 +26,34 @@ internal class DrawableObjectsImpl : Game
 
     protected override void LoadContent()
     {
-        sprite = new Sprite("hc.jpg");
-        sprite.transform.scale = new(1f, 1f, 0.0f);
-        sprite.transform.position = new(0f, -0.5f, 0f);
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+        sprites.Add(new Sprite("hc.jpg"));
+
+        Random rnd = new Random();
+        foreach (var sprite in sprites)
+        {
+            sprite.transform.position = new System.Numerics.Vector3((float)rnd.NextDouble() * rnd.Next(-2, 2), (float)rnd.NextDouble() * rnd.Next(-2, 2), (float)rnd.NextDouble() * rnd.Next(-2, 2));
+        }
     }
 
     protected override void Update(GameTime Time)
@@ -75,14 +100,21 @@ internal class DrawableObjectsImpl : Game
             dir.Z * (cameraSpeed / 2) * Time.deltaTime / 1000,
             dir.X * cameraSpeed * Time.deltaTime / 1000));
 
-        sprite.Update();
+        foreach (var sprite in sprites)
+        {
+            sprite.Update();
+        }
     }
 
     protected override void Render(GameTime gameTime)
     {
         GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
         GL.ClearColor(Color4.CornflowerBlue);
-        sprite.Draw();
+
+        foreach (var sprite in sprites)
+        {
+            sprite.Draw();
+        }
     }
 }
 

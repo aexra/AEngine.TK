@@ -42,4 +42,11 @@ public abstract class IDrawableObject : GameObject
     }
 
     protected abstract void Load();
+    public override void Draw()
+    {
+        Shader.Use();
+        Shader.SetMatrix4("model", transform.Matrix);
+        Shader.SetMatrix4("view", Camera.view);
+        Shader.SetMatrix4("projection", Camera.projection);
+    }
 }

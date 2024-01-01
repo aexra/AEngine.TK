@@ -49,7 +49,6 @@ public class Sprite : IDrawableObject
         layout.Add<float>(1);
 
         VertexArray.AddBuffer(VertexBuffer, layout);
-        Shader.Use();
         IndexBuffer = new IndexBuffer(Indices);
 
         var textureSamplerUniformLocation = Shader.GetUniformLocation("u_Texture[0]");
@@ -89,13 +88,12 @@ public class Sprite : IDrawableObject
 
     public override void Update()
     {
-        Shader.SetMatrix4("model", transform.Matrix);
-        Shader.SetMatrix4("view", Camera.view);
-        Shader.SetMatrix4("projection", Camera.projection);
+        
     }
 
     public override void Draw()
     {
+        base.Draw();
         VertexArray.Bind();
         GL.DrawElements(PrimitiveType.Triangles, Indices.Length, DrawElementsType.UnsignedInt, 0);
     }
