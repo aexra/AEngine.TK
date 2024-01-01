@@ -6,16 +6,19 @@ layout (location = 2) in float aIndex;
 out vec2 texCoord;
 out vec4 color;
 out float texIndex;
+out vec2 windowSize;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 uniform vec4 aColor;
+uniform vec2 aWindowSize;
 
 void main() 
 {
     color = aColor;
     texIndex = aIndex;
     texCoord = aTexCoord;
+    windowSize = aWindowSize;
     gl_Position = vec4(aPosition.xyz, 1.0) * model * view * projection;
 }
 
@@ -25,6 +28,7 @@ out vec4 outputColor;
 in float texIndex;
 in vec2 texCoord;
 in vec4 color;
+in vec2 windowSize;
 uniform sampler2D u_Texture[2];
 uniform vec3 mousePos;
 

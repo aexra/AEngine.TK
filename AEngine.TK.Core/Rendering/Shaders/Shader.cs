@@ -114,6 +114,11 @@ public class Shader
         GL.UniformMatrix4(_uniforms[uniformName], true, ref value);
     }
 
+    public void SetVector2(string uniformName, Vector2 value)
+    {
+        GL.Uniform2(_uniforms[uniformName], value);
+    }
+
     public void SetVector3(string uniformName, Vector3 value)
     {
         GL.Uniform3(_uniforms[uniformName], value);

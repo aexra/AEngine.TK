@@ -1,6 +1,8 @@
-﻿using AEngine.TK.Core.Management;
+﻿using AEngine.TK.Core.Config;
+using AEngine.TK.Core.Management;
 using AEngine.TK.Core.Utils;
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using System;
@@ -37,6 +39,7 @@ public abstract class Game
         GL.Enable(EnableCap.DepthTest);
         GL.Enable(EnableCap.Blend);
         GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+        SessionConfig.WindowSize = new Vector2(InitialWindowWidth, InitialWindowHeight);
         GameWindow.Load += LoadContent;
         GameWindow.UpdateFrame += (FrameEventArgs e) =>
         {
@@ -52,6 +55,7 @@ public abstract class Game
         };
         GameWindow.Resize += (ResizeEventArgs e) => 
         {
+            SessionConfig.WindowSize = new Vector2(GameWindow.ClientSize.X, GameWindow.ClientSize.Y);
             GL.Viewport(0, 0, GameWindow.ClientSize.X, GameWindow.ClientSize.Y);
         };
         GameWindow.MouseMove += Input.OnMouseMove;

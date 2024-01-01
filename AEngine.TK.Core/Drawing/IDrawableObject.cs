@@ -10,6 +10,7 @@ using AEngine.TK.Core.Rendering;
 using AEngine.TK.Core.Utils;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
+using AEngine.TK.Core.Config;
 
 namespace AEngine.TK.Core.Drawing;
 
@@ -48,6 +49,7 @@ public abstract class IDrawableObject : GameObject
     public override void Draw()
     {
         Shader.Use();
+        if (Shader.ContainsUniform("windowSize")) Shader.SetVector2("aWindowSize", SessionConfig.WindowSize);
         if (Shader.ContainsUniform("mousePos")) Shader.SetVector3("mousePos", new Vector3(Input.MousePosition.X, Input.MousePosition.Y, 0f));
         if (Shader.ContainsUniform("aColor")) Shader.SetVector4("aColor", Modulate);
         Shader.SetMatrix4("model", transform.Matrix);
