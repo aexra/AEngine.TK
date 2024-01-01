@@ -66,7 +66,6 @@ public class Shader
             int location = GL.GetUniformLocation(ProgramId, key);
             _uniforms.Add(key, location);
         }
-
         Compiled = true;
         return true;
     }
@@ -118,5 +117,15 @@ public class Shader
     public void SetVector3(string uniformName, Vector3 value)
     {
         GL.Uniform3(_uniforms[uniformName], value);
+    }
+
+    public bool ContainsUniform(string uniformName)
+    {
+        return _uniforms.TryGetValue(uniformName, out _);
+    }
+
+    public bool ContainsUniform(string uniformName, out int key)
+    {
+        return _uniforms.TryGetValue(uniformName, out key);
     }
 }

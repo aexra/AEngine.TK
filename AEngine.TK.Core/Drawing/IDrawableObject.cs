@@ -22,6 +22,8 @@ public abstract class IDrawableObject : GameObject
     protected VertexBuffer VertexBuffer;
     protected IndexBuffer IndexBuffer;
 
+    public Vector4 Modulate = Vector4.One;
+
     public IDrawableObject() : base()
     {
         
@@ -46,7 +48,7 @@ public abstract class IDrawableObject : GameObject
     public override void Draw()
     {
         Shader.Use();
-        Shader.SetVector3("mousePos", new Vector3(Input.MousePosition.X, Input.MousePosition.Y, 0f));
+        if (Shader.ContainsUniform("mousePos")) Shader.SetVector3("mousePos", new Vector3(Input.MousePosition.X, Input.MousePosition.Y, 0f));
         Shader.SetMatrix4("model", transform.Matrix);
         Shader.SetMatrix4("view", Camera.view);
         Shader.SetMatrix4("projection", Camera.projection);
