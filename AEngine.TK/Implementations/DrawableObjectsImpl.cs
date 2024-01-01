@@ -30,7 +30,7 @@ internal class DrawableObjectsImpl : Game
         Tree.Add(new Rectangle(Color4.Violet));
         Tree.Last().transform.position.Z += -1;
         Tree.Last().transform.scale.X += 2;
-        Tree.Add(new Rectangle(new Color4(0, 0, 0, 0.1f)));
+        Tree.Add(new Rectangle(new Color4(0, 0, 0, 0.5f)));
     }
 
     protected override void Update()

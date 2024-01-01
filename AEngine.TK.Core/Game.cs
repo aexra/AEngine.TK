@@ -35,6 +35,8 @@ public abstract class Game
         Initialize();
         GameWindow = DisplayManager.Instance.CreateWindow(_gameWindowSettings, _nativeWindowSettings);
         GL.Enable(EnableCap.DepthTest);
+        GL.Enable(EnableCap.Blend);
+        GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
         GameWindow.Load += LoadContent;
         GameWindow.UpdateFrame += (FrameEventArgs e) =>
         {
