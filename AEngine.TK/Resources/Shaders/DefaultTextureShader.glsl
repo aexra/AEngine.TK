@@ -2,18 +2,18 @@
 #version 330 core
 layout (location = 0) in vec3 aPosition;
 layout (location = 1) in vec2 aTexCoord;
-layout (location = 2) in vec3 aColor;
-layout (location = 3) in float aIndex;
+layout (location = 2) in float aIndex;
 out vec2 texCoord;
 out vec4 color;
 out float texIndex;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
+uniform vec4 aColor;
 
 void main() 
 {
-    color = vec4(aColor.rgb, 1.0);
+    color = aColor;
     texIndex = aIndex;
     texCoord = aTexCoord;
     gl_Position = vec4(aPosition.xyz, 1.0) * model * view * projection;
@@ -31,5 +31,5 @@ uniform vec3 mousePos;
 void main() 
 {
     int index = int(texIndex);
-    outputColor = texture(u_Texture[index], texCoord) * color * vec4(mousePos.xyz, 1.0);
+    outputColor = texture(u_Texture[index], texCoord) * color;
 }

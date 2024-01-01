@@ -49,6 +49,7 @@ public abstract class IDrawableObject : GameObject
     {
         Shader.Use();
         if (Shader.ContainsUniform("mousePos")) Shader.SetVector3("mousePos", new Vector3(Input.MousePosition.X, Input.MousePosition.Y, 0f));
+        if (Shader.ContainsUniform("aColor")) Shader.SetVector4("aColor", Modulate);
         Shader.SetMatrix4("model", transform.Matrix);
         Shader.SetMatrix4("view", Camera.view);
         Shader.SetMatrix4("projection", Camera.projection);

@@ -119,6 +119,11 @@ public class Shader
         GL.Uniform3(_uniforms[uniformName], value);
     }
 
+    public void SetVector4(string uniformName, Vector4 value)
+    {
+        GL.Uniform4(_uniforms[uniformName], value);
+    }
+
     public bool ContainsUniform(string uniformName)
     {
         return _uniforms.TryGetValue(uniformName, out _);

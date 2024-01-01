@@ -45,7 +45,6 @@ public class Sprite : IDrawableObject
         BufferLayout layout = new();
         layout.Add<float>(3);
         layout.Add<float>(2);
-        layout.Add<float>(3);
         layout.Add<float>(1);
 
         VertexArray.AddBuffer(VertexBuffer, layout);
@@ -63,20 +62,20 @@ public class Sprite : IDrawableObject
         {
             float otherside = 1 / Size.X * Size.Y;
             Vertices = [
-                1f,otherside,0.0f,1.0f,1.0f,1.0f,1.0f,1.0f,0.0f,
-                1f,-otherside,0.0f,1.0f,0.0f,1.0f,1.0f,1.0f,0.0f,
-                -1f,-otherside,0.0f,0.0f,0.0f,1.0f,1.0f,1.0f,0.0f,
-                -1f,otherside,0.0f,0.0f,1.0f,1.0f,1.0f,1.0f,0.0f,
+                1f,otherside,0.0f,1.0f,1.0f,0.0f,
+                1f,-otherside,0.0f,1.0f,0.0f,0.0f,
+                -1f,-otherside,0.0f,0.0f,0.0f,0.0f,
+                -1f,otherside,0.0f,0.0f,1.0f,0.0f,
             ];
         }
         else
         {
             float otherside = 1 / Size.Y * Size.X;
             Vertices = [
-                otherside,1f,0.0f,1.0f,1.0f,1.0f,1.0f,1.0f,0.0f,
-                otherside,-1f,0.0f,1.0f,0.0f,1.0f,1.0f,1.0f,0.0f,
-                -otherside,-1f,0.0f,0.0f,0.0f,1.0f,1.0f,1.0f,0.0f,
-                -otherside,1f,0.0f,0.0f,1.0f,1.0f,1.0f,1.0f,0.0f,
+                otherside,1f,0.0f,1.0f,1.0f,0.0f,
+                otherside,-1f,0.0f,1.0f,0.0f,0.0f,
+                -otherside,-1f,0.0f,0.0f,0.0f,0.0f,
+                -otherside,1f,0.0f,0.0f,1.0f,0.0f,
             ];
         }
     }
