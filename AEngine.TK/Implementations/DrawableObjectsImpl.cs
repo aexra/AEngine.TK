@@ -31,7 +31,6 @@ internal class DrawableObjectsImpl : Game
         Tree.Last().transform.position.Z += -1;
         Tree.Last().transform.scale.X += 2;
         Tree.Add(new Rectangle(new Color4(0, 0, 0, 0.1f)));
-        GL.Enable(EnableCap.DepthTest);
     }
 
     protected override void Update()
