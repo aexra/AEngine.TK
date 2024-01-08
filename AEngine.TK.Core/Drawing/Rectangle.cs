@@ -40,7 +40,6 @@ public class Rectangle : IDrawableObject
 
         BufferLayout layout = new();
         layout.Add<float>(3);
-        layout.Add<float>(4);
 
         VertexArray.AddBuffer(VertexBuffer, layout);
         IndexBuffer = new IndexBuffer(Indices);
@@ -53,20 +52,20 @@ public class Rectangle : IDrawableObject
         {
             float otherside = 1 / transform.scale.X * transform.scale.Y;
             Vertices = [
-                1f, otherside, 0.0f, Modulate.X, Modulate.Y, Modulate.Z, Modulate.W,
-                1f, -otherside, 0.0f, Modulate.X, Modulate.Y, Modulate.Z, Modulate.W,
-                -1f, -otherside, 0.0f, Modulate.X, Modulate.Y, Modulate.Z, Modulate.W,
-                -1f, otherside, 0.0f, Modulate.X, Modulate.Y, Modulate.Z, Modulate.W,
+                1f, otherside, 0.0f,
+                1f, -otherside, 0.0f,
+                -1f, -otherside, 0.0f,
+                -1f, otherside, 0.0f,
             ];
         }
         else
         {
             float otherside = 1 / transform.scale.Y * transform.scale.X;
             Vertices = [
-                otherside, 1f, 0.0f, Modulate.X, Modulate.Y, Modulate.Z, Modulate.W,
-                otherside, -1f, 0.0f, Modulate.X, Modulate.Y, Modulate.Z, Modulate.W,
-                -otherside, -1f, 0.0f, Modulate.X, Modulate.Y, Modulate.Z, Modulate.W,
-                -otherside, 1f, 0.0f, Modulate.X, Modulate.Y, Modulate.Z, Modulate.W,
+                otherside, 1f, 0.0f,
+                otherside, -1f, 0.0f,
+                -otherside, -1f, 0.0f,
+                -otherside, 1f, 0.0f,
             ];
         }
     }

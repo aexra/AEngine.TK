@@ -1,4 +1,5 @@
 ﻿using AEngine.TK.Core.Engine;
+using AEngine.TK.Core.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +15,7 @@ public abstract class GameObject
     public bool visible;
     public bool active;
     public string name;
+    public Shader Shader { get; protected set; }
 
     public GameObject()
     {

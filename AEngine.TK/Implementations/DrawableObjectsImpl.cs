@@ -1,12 +1,15 @@
 ﻿using AEngine.TK.Core;
+using AEngine.TK.Core.Config;
 using AEngine.TK.Core.Drawing;
 using AEngine.TK.Core.Engine;
 using AEngine.TK.Core.Rendering;
 using AEngine.TK.Core.Rendering.Buffers;
+using AEngine.TK.Core.Utils;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using System.Reflection;
 using System.Resources;
 
 namespace AEngine.TK;
@@ -14,7 +17,7 @@ namespace AEngine.TK;
 internal class DrawableObjectsImpl : Game
 {
     float cameraSpeed = 2f;
-    Sprite sprite;
+    Rectangle rect;
 
     public DrawableObjectsImpl(string windowTitle, int initialWindowWidth, int initialWindowHeight) : base(windowTitle, initialWindowWidth, initialWindowHeight)
     {
@@ -28,7 +31,19 @@ internal class DrawableObjectsImpl : Game
 
     protected override void LoadContent()
     {
-        Tree.Add(new Rectangle(Color4.Black));
+        rect = new Rectangle(Color4.Red);
+
+        Shader shader = new Shader("Resources/Shaders/testRectShader.glsl");
+        shader.CompileShader();
+
+        rect.SetCustomShaderUniforms += () => 
+        {
+            shader.SetVector2("aWindowSize", SessionConfig.WindowSize);
+            shader.SetVector3("mousePos", new Vector3(Input.MousePosition.X, Input.MousePosition.Y, 0f));
+        };
+        rect.SetShader(shader);
+
+        Tree.Add(rect);
     }
 
     protected override void Update()

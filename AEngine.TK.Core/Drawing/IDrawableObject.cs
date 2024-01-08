@@ -18,16 +18,16 @@ public abstract class IDrawableObject : GameObject
 {
     protected float[] Vertices;
     protected uint[] Indices;
-    protected Shader Shader;
     protected VertexArray VertexArray;
     protected VertexBuffer VertexBuffer;
     protected IndexBuffer IndexBuffer;
 
+    public Action SetCustomShaderUniforms;
     public Vector4 Modulate = Vector4.One;
 
     public IDrawableObject() : base()
     {
-       
+        SetCustomShaderUniforms = __SetCustomUniforms__;
     }
 
     public IDrawableObject(Vector3 position) : this() 
@@ -49,11 +49,20 @@ public abstract class IDrawableObject : GameObject
     public override void Draw()
     {
         Shader.Use();
-        if (Shader.ContainsUniform("aWindowSize")) Shader.SetVector2("aWindowSize", SessionConfig.WindowSize);
-        if (Shader.ContainsUniform("mousePos")) Shader.SetVector3("mousePos", new Vector3(Input.MousePosition.X, Input.MousePosition.Y, 0f));
-        if (Shader.ContainsUniform("aColor")) Shader.SetVector4("aColor", Modulate);
+        Shader.SetVector4("aColor", Modulate);
         Shader.SetMatrix4("model", transform.Matrix);
         Shader.SetMatrix4("view", Camera.view);
         Shader.SetMatrix4("projection", Camera.projection);
+        SetCustomShaderUniforms();
+    }
+
+    protected void __SetCustomUniforms__()
+    {
+        
+    }
+
+    public void SetShader(Shader newShader)
+    {
+        Shader = newShader;
     }
 }

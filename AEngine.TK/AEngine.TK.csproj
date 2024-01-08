@@ -18,6 +18,9 @@
     <None Update="Resources\Shaders\MulTextures.glsl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\Shaders\testRectShader.glsl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\Shaders\TextureShader.glsl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
