@@ -30,7 +30,7 @@ internal class DrawableObjectsImpl : Game
 
     protected override void LoadContent()
     {
-        Tree.Add(new Rectangle(Color4.Cyan));
+        Tree.Add(new Sprite("honestree.png"));
     }
 
     protected override void Update()

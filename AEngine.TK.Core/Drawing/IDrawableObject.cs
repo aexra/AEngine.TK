@@ -23,7 +23,7 @@ public abstract class IDrawableObject : GameObject
     protected VertexBuffer VertexBuffer;
     protected IndexBuffer IndexBuffer;
 
-    public Vector4 Modulate = Vector4.One;
+    public Vector4 Modulate = Vector4.Zero;
 
     public IDrawableObject() : base()
     {
