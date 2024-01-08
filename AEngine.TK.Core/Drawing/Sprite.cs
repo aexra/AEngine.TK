@@ -32,7 +32,7 @@ public class Sprite : IDrawableObject
         DefineVertices();
         DefineIndices();
 
-        Shader = new Shader("Resources/Shaders/DefaultTextureShader.glsl");
+        Shader = new Shader("Rendering/Shaders/Default/DefaultSpriteShader.glsl");
         if (!Shader.CompileShader())
         {
             Console.WriteLine("Failed to Compile Shader");

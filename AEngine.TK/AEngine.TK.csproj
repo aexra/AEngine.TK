@@ -15,12 +15,6 @@
     <None Update="Resources\Shaders\default.glsl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Shaders\DefaultPrimitiveShader.glsl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Shaders\DefaultTextureShader.glsl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Resources\Shaders\MulTextures.glsl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

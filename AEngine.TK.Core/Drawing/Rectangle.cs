@@ -28,7 +28,7 @@ public class Rectangle : IDrawableObject
         DefineVertices();
         DefineIndices();
 
-        Shader = new Shader("Resources/Shaders/DefaultPrimitiveShader.glsl");
+        Shader = new Shader("Rendering/Shaders/Default/DefaultRectangleShader.glsl");
         if (!Shader.CompileShader())
         {
             Console.WriteLine("Failed to Compile Shader");
