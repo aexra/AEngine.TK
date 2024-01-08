@@ -1,6 +1,8 @@
 ﻿using AEngine.TK.Core.Rendering.Shaders;
+using AEngine.TK.Core.Utils;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
+using System.Reflection;
 
 namespace AEngine.TK.Core.Rendering;
 
@@ -11,8 +13,13 @@ public class Shader
     public bool Compiled { get; private set; }
     private readonly IDictionary<string, int> _uniforms = new Dictionary<string, int>();
 
+    public Action ApplyUniforms;
+    public Action ApplyNativeUniforms;
+
     public Shader(string filePath)
     {
+        ApplyUniforms = __ApplyUniforms__;
+        ApplyNativeUniforms = __ApplyNativeUniforms__;
         _shaderProgramSource = ParseShader(filePath);
     }
 
@@ -74,7 +81,11 @@ public class Shader
 
     public void Use()
     {
-        if (!Compiled) CompileShader(); 
+        if (!Compiled) CompileShader();
+
+        ApplyNativeUniforms();
+        ApplyUniforms();
+
         GL.UseProgram(ProgramId);
     }
 
@@ -137,5 +148,15 @@ public class Shader
     public bool ContainsUniform(string uniformName, out int key)
     {
         return _uniforms.TryGetValue(uniformName, out key);
+    }
+
+    private void __ApplyUniforms__()
+    {
+        
+    }
+
+    private void __ApplyNativeUniforms__()
+    {
+        
     }
 }

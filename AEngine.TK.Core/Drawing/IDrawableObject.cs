@@ -11,6 +11,7 @@ using AEngine.TK.Core.Utils;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
 using AEngine.TK.Core.Config;
+using System.Reflection;
 
 namespace AEngine.TK.Core.Drawing;
 
@@ -22,12 +23,11 @@ public abstract class IDrawableObject : GameObject
     protected VertexBuffer VertexBuffer;
     protected IndexBuffer IndexBuffer;
 
-    public Action SetCustomShaderUniforms;
     public Vector4 Modulate = Vector4.One;
 
     public IDrawableObject() : base()
     {
-        SetCustomShaderUniforms = __SetCustomUniforms__;
+       
     }
 
     public IDrawableObject(Vector3 position) : this() 
@@ -48,17 +48,14 @@ public abstract class IDrawableObject : GameObject
     protected abstract void Load();
     public override void Draw()
     {
+        Shader.ApplyNativeUniforms += () =>
+        {
+            Shader.SetVector4("aColor", Modulate);
+            Shader.SetMatrix4("model", transform.Matrix);
+            Shader.SetMatrix4("view", Camera.view);
+            Shader.SetMatrix4("projection", Camera.projection);
+        };
         Shader.Use();
-        Shader.SetVector4("aColor", Modulate);
-        Shader.SetMatrix4("model", transform.Matrix);
-        Shader.SetMatrix4("view", Camera.view);
-        Shader.SetMatrix4("projection", Camera.projection);
-        SetCustomShaderUniforms();
-    }
-
-    protected void __SetCustomUniforms__()
-    {
-        
     }
 
     public void SetShader(Shader newShader)

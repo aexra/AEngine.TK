@@ -31,16 +31,17 @@ internal class DrawableObjectsImpl : Game
 
     protected override void LoadContent()
     {
-        rect = new Rectangle(Color4.Red);
+        rect = new Rectangle(Color4.Cyan);
 
         Shader shader = new Shader("Resources/Shaders/testRectShader.glsl");
         shader.CompileShader();
 
-        rect.SetCustomShaderUniforms += () => 
+        shader.ApplyUniforms += () =>
         {
             shader.SetVector2("aWindowSize", SessionConfig.WindowSize);
             shader.SetVector3("mousePos", new Vector3(Input.MousePosition.X, Input.MousePosition.Y, 0f));
         };
+
         rect.SetShader(shader);
 
         Tree.Add(rect);
