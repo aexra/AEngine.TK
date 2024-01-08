@@ -30,7 +30,18 @@ internal class DrawableObjectsImpl : Game
 
     protected override void LoadContent()
     {
-        Tree.Add(new Sprite("honestree.png"));
+        Sprite sprite = new Sprite("honestree.png");
+
+        Shader shader = new Shader("Resources/Shaders/testSpriteShader.glsl");
+        shader.ApplyUniforms += () => 
+        {
+            shader.SetVector3("mousePos", new Vector3(Input.MousePosition.X, Input.MousePosition.Y, 0));
+            shader.SetVector2("aWindowSize", SessionConfig.WindowSize);
+        };
+
+        sprite.SetShader(shader);
+        
+        Tree.Add(sprite);
     }
 
     protected override void Update()
