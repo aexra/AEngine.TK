@@ -17,7 +17,6 @@ namespace AEngine.TK;
 internal class DrawableObjectsImpl : Game
 {
     float cameraSpeed = 2f;
-    Rectangle rect;
 
     public DrawableObjectsImpl(string windowTitle, int initialWindowWidth, int initialWindowHeight) : base(windowTitle, initialWindowWidth, initialWindowHeight)
     {
@@ -31,20 +30,7 @@ internal class DrawableObjectsImpl : Game
 
     protected override void LoadContent()
     {
-        rect = new Rectangle(Color4.Cyan);
-
-        Shader shader = new Shader("Resources/Shaders/testRectShader.glsl");
-        shader.CompileShader();
-
-        shader.ApplyUniforms += () =>
-        {
-            shader.SetVector2("aWindowSize", SessionConfig.WindowSize);
-            shader.SetVector3("mousePos", new Vector3(Input.MousePosition.X, Input.MousePosition.Y, 0f));
-        };
-
-        rect.SetShader(shader);
-
-        Tree.Add(rect);
+        Tree.Add(new Rectangle(Color4.Cyan));
     }
 
     protected override void Update()
