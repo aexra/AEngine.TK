@@ -18,8 +18,6 @@ namespace AEngine.TK;
 
 internal class ExperimentsOnlyImpl : Game
 {
-    float cameraSpeed = 2f;
-
     public ExperimentsOnlyImpl(string windowTitle, int initialWindowWidth, int initialWindowHeight) : base(windowTitle, initialWindowWidth, initialWindowHeight)
     {
     }
@@ -33,7 +31,7 @@ internal class ExperimentsOnlyImpl : Game
     protected override void LoadContent()
     {
         Particle p = new Particle(Color4.Black);
-        
+        p.ScaleTo(0.01f, 0.01f, 1f);
         Tree.Add(p);
     }
 

@@ -14,10 +14,14 @@ public class Particle : GameObject
 {
     private Rectangle _rect;
 
-    public Particle(Color4 color, float x = 0, float y = 0, float z = 0, float sx = 0.1f, float sy = 0.1f, float sz = 1f)
+    public Particle(Color4 color, float x = 0, float y = 0, float z = 0, float sx = 1f, float sy = 1f, float sz = 1f) : base()
     {
-        transform = new Transform();
-        _rect = new(color, x, y, z, sx, sy, sz);
+        transform.position = new Vector3(x, y, z);
+        transform.scale = new Vector3(sx, sy, sz);
+        _rect = new(color);
+        _rect.Translate(x, y, z);
+        _rect.ScaleTo(sx, sy, sz);
+        Children.Add(_rect);
     }
 
     public override void Update()
