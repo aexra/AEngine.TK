@@ -5,6 +5,8 @@ using AEngine.TK.Core.Engine;
 using AEngine.TK.Core.Rendering;
 using AEngine.TK.Core.Rendering.Buffers;
 using AEngine.TK.Core.Utils;
+using AEngine.TK.Implementations.ExperimentsImpl;
+using OpenTK.Graphics.GL;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
@@ -30,18 +32,9 @@ internal class ExperimentsOnlyImpl : Game
 
     protected override void LoadContent()
     {
-        Sprite sprite = new Sprite("honestree.png");
-
-        Shader shader = new Shader("Resources/Shaders/testSpriteShader.glsl");
-        shader.ApplyUniforms += () =>
-        {
-            shader.SetVector3("mousePos", new Vector3(Input.MousePosition.X, Input.MousePosition.Y, 0));
-            shader.SetVector2("aWindowSize", SessionConfig.WindowSize);
-        };
-
-        sprite.SetShader(shader);
-
-        Tree.Add(sprite);
+        Particle p = new Particle(Color4.Black);
+        
+        Tree.Add(p);
     }
 
     protected override void Update()
