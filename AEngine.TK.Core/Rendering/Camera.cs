@@ -19,7 +19,7 @@ public class Camera
 
     public static void Init(float fovDegrees = 45.0f, float aspect = 16.0f / 9.0f, float depthNear = 0.1f, float depthFar = 100.0f)
     {
-        view = Matrix4.CreateTranslation(position);
+        view = Matrix4.LookAt(position, position + front, Vector3.UnitY);
         projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(fovDegrees), aspect, depthNear, depthFar);
     }
 
