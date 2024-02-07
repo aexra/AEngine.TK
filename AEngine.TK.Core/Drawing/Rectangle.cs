@@ -12,9 +12,6 @@ namespace AEngine.TK.Core.Drawing;
 
 public class Rectangle : IDrawableObject
 {
-    public string FileName;
-    public string Directory;
-
     public Rectangle(Color4 color, float x = 0, float y = 0, float z = 0, float sx = 1, float sy = 1, float sz = 1)
     {
         Modulate = new Vector4(color.R, color.G, color.B, color.A);

@@ -5,7 +5,7 @@ using AEngine.TK.Core.Engine;
 using AEngine.TK.Core.Rendering;
 using AEngine.TK.Core.Rendering.Buffers;
 using AEngine.TK.Core.Utils;
-using AEngine.TK.Implementations.ExperimentsImpl;
+using Microsoft.VisualBasic;
 using OpenTK.Graphics.GL;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
@@ -18,6 +18,10 @@ namespace AEngine.TK;
 
 internal class ExperimentsOnlyImpl : Game
 {
+    private int interval = 50;
+    private int timer = 0;
+    private Particle p;
+
     public ExperimentsOnlyImpl(string windowTitle, int initialWindowWidth, int initialWindowHeight) : base(windowTitle, initialWindowWidth, initialWindowHeight)
     {
     }
@@ -30,7 +34,7 @@ internal class ExperimentsOnlyImpl : Game
 
     protected override void LoadContent()
     {
-        Particle p = new Particle(Color4.Black);
+        p = new Particle(Color4.Black);
         p.ScaleTo(0.01f, 0.01f, 1f);
         Tree.Add(p);
     }
@@ -40,6 +44,19 @@ internal class ExperimentsOnlyImpl : Game
         if (!GameWindow.IsFocused)
         {
             return;
+        }
+
+        timer += Time.deltaTime;
+        if (timer >= interval)
+        {
+            timer = 0;
+            if (p.Visible)
+            {
+                p.Hide();
+            } else
+            {
+                p.Show();
+            }
         }
 
         Tree.Update();

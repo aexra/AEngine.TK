@@ -65,7 +65,8 @@ public class Tree
     {
         foreach (GameObject obj in gameObjects)
         {
-            obj.Update();
+            if (obj.Active)
+                obj.Update();
         }
     }
 
@@ -73,7 +74,8 @@ public class Tree
     {
         foreach (GameObject obj in gameObjects)
         {
-            obj.Draw();
+            if (obj.Visible)
+                obj.Draw();
         }
     }
 
